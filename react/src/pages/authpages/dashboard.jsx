@@ -3,7 +3,7 @@ const Dashboard = ()=>{
     const { data: user, isLoading } = useMe();
     console.log(user);
     return (<>
-        <h1>Dashboard</h1>
+        <h1>Welcome {user?.name}</h1>
     </>);
 }
 export default Dashboard;
