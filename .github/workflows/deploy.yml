@@ -1,4 +1,4 @@
-name: Deploy MERN App
+name: Deploy
 
 on:
   push:
@@ -10,39 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install backend dependencies
-        run: |
-          cd backend
-          pnpm install
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
+          username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            export PATH=$PATH:/usr/bin:/usr/local/bin
-
             echo "Connected to EC2"
-
-            cd /home/ubuntu/react-node
-
-            git pull origin main
-
-            cd backend
-
-            /usr/bin/pnpm install
-
-            /usr/bin/pm2 restart index
