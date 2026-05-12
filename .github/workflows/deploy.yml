@@ -33,12 +33,16 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            export PATH=$PATH:/usr/bin
+            export PATH=$PATH:/usr/bin:/usr/local/bin
 
-            cd ~/react-node
+            echo "Connected to EC2"
+
+            cd /home/ubuntu/react-node
+
             git pull origin main
 
             cd backend
-            pnpm install
 
-            pm2 restart index
+            /usr/bin/pnpm install
+
+            /usr/bin/pm2 restart index
