@@ -18,4 +18,22 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
+            export PATH=$PATH:/usr/bin:/usr/local/bin
+
             echo "Connected to EC2"
+
+            cd /home/ubuntu/react-node
+
+            git pull origin main
+
+            # Backend
+            cd backend
+            /usr/bin/pnpm install
+            /usr/bin/pm2 restart index
+
+            # Frontend
+            cd ../frontend
+            /usr/bin/pnpm install
+            /usr/bin/pnpm run build
+
+            echo "Deployment completed"
