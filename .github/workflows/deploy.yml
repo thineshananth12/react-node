@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,6 +20,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install frontend dependencies
         run: |
@@ -36,6 +42,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            export PATH=$PATH:/usr/bin
+
             cd ~/react-node
             git pull origin main
 
