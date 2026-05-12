@@ -1,7 +1,6 @@
-import {useMe} from "./../../queries/userQueries"
+import {useMe} from "../../queries/userQueries"
 const Dashboard = ()=>{
     const { data: user, isLoading } = useMe();
-    console.log(user);
     return (<>
         <h1>Welcome {user?.name}</h1>
     </>);

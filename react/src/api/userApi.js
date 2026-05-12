@@ -10,3 +10,13 @@ export const getMe = async () => {
   const res = await axiosInstance.get("/user/me");
   return res.data; // always return data only
 };
+export const saveContact = async (data) =>{
+    return axiosInstance.post('/user/create', data);
+}
+export const getList = (data)=>{
+    return axiosInstance.get('/user/list',
+        {
+            params: data
+        }
+    );
+}

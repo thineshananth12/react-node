@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { toast } from 'react-toastify';
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, "Minimum 6 characters"),
@@ -37,6 +37,8 @@ const Login = ()=>{
         const token = loginMutation.mutate(formDetails,{
             onSuccess: ()=>{
                navigate('/dashboard');
+            }, onError: (error, variables, context)=>{
+                toast.error(error.response.data.message);
             }
         });
     };

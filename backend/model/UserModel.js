@@ -23,6 +23,10 @@ const UserModel = new mongodb.Schema({
         type: Boolean,
         default: 0
     },
+     profile_pic: {
+        type: String,
+        default: null
+    },
     created_by: {
         type: mongodb.Schema.Types.ObjectId,
         ref: 'User',
