@@ -9,25 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
       - name: Install pnpm
         run: npm install -g pnpm
-
-      - name: Install frontend dependencies
-        run: |
-          cd ../frontend
-          pnpm install
-          pnpm run build
 
       - name: Install backend dependencies
         run: |
