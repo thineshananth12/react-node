@@ -19,7 +19,7 @@ app.use(cors({
 }));
 const ipLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 mins
-    max: 1, // each IP => 1 requests
+    max: 100, // each IP => 1 requests
     message: 'Too many requests from this IP',
     handler: (req, res, next, options) => {
         console.log('Rate limit:',req.rateLimit,req.ip);
