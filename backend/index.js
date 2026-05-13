@@ -14,7 +14,7 @@ const server = http.createServer(app);
 app.use(cookieParser()); // 🔥 REQUIRED
 //app.use(cors());
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  origin: ['http://localhost:5173', 'http://65.2.177.122'],
   credentials: true
 }));
 const ipLimiter = rateLimit({
